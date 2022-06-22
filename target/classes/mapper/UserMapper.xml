@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace为唯一标识，映射器接口的全限定名 -->
+
+
+<mapper namespace="abc.mapper.UserMapper">
+
+
+    <resultMap type="abc.entity.User" id="UserMap">
+        <id column="user_id" property="userId"/>
+        <result column="user_name" property="userName"/>
+        <result column="user_password" property="userPassword"/>
+        <result column="user_introduction" property="userIntroduction"/>
+        <result column="user_image" property="userImage"/>
+        <result column="user_create_time" property="userCreateTime"/>
+        <collection property="userPaints" ofType="abc.entity.Paint" javaType="java.util.List" >
+            <id column="paint_id" property="paintId"/>
+            <result column="painter_id" property="painterId"/>
+            <result column="painter_name" property="painterName"/>
+            <result column="paint_name" property="paintName"/>
+            <result column="paint_image_name" property="paintImageName"/>
+            <result column="paint_score" property="paintScore"/>
+            <result column="paint_introduction" property="paintIntroduction"/>
+            <result column="paint_create_time" property="paintCreateTime"/>
+        </collection>
+    </resultMap>
+
+
+    <select id="fun1" resultMap="UserMap">
+        select  u.*, p.*
+        from user u   left join paint p
+        on u.user_name = p.painter_name
+where 1 = 1
+
+    </select>
+
+
+</mapper>
